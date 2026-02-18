@@ -13,7 +13,18 @@ foreach(var game in games)
 //declare filter class
 var gamesFilter = new GamesFilters();
 //add method to delegate type property
-gamesFilter.OnSearchGames = SearchByTitle;
+//use lambdas
+gamesFilter.OnSearchGames = (games, search ) =>
+{
+    var gamesResults = new List<Game>();
+    foreach (var game in games)
+    {
+        if (game.Title.ToLower().Contains(search.ToLower()))
+            gamesResults.Add(game);
+    }
+    //return gamesResults
+    return gamesResults;
+};
 //call the delegate type property/method
 var results = gamesFilter.FilterGames(games, "The");
 Console.WriteLine("-----------Results by action------------");
@@ -22,7 +33,17 @@ foreach(var game in results)
     Console.WriteLine(game.Title);
 }
 //search by genre
-gamesFilter.OnSearchGames = SearchByGenre;
+gamesFilter.OnSearchGames = (games, search) =>
+{
+    var gamesResults = new List<Game>();
+    foreach (var game in games)
+    {
+        if (game.Genre.ToLower().Contains(search.ToLower()))
+            gamesResults.Add(game);
+    }
+    //return gamesResults
+    return gamesResults;
+};
 results = gamesFilter.FilterGames(games, "Action");
 Console.WriteLine("-----------Results by genre------------");
 foreach (var game in results)
@@ -35,30 +56,6 @@ foreach (var game in results)
  4. Gebruik de delegates met named methods
  */
 //search games by title
-IEnumerable<Game> SearchByTitle(IEnumerable<Game> games, string search)
-{
-    //search games
-    var gamesResults = new List<Game>();
-    foreach(var game in games)
-    {
-        if (game.Title.ToLower().Contains(search.ToLower()))
-            gamesResults.Add(game);
-    }
-    //return gamesResults
-    return gamesResults;
-}
-IEnumerable<Game> SearchByGenre(IEnumerable<Game> games, string search)
-{
-    //search games
-    var gamesResults = new List<Game>();
-    foreach (var game in games)
-    {
-        if (game.Genre.ToLower().Contains(search.ToLower()))
-            gamesResults.Add(game);
-    }
-    //return gamesResults
-    return gamesResults;
-}
 /*
  5. Gebruik de delegates met lambda methods
  */
