@@ -14,7 +14,7 @@ namespace Pre.DelegateGames.Cons.Classes
     /*
     2. Schrijf een delegate waarmee we de game met de hoogste rating of prijs kunnen ophalen
     */
-    public delegate Game SearchGamesByRatingOrPrice(, IEnumerable<Game> games, double max);
+    public delegate Game SearchGamesByRatingOrPrice(IEnumerable<Game> games, double max);
     /*
      3. Schrijf een delegate waarmee we kunnen controleren of een bepaalde game in de lijst zit(return type bool)
      */
@@ -37,7 +37,7 @@ namespace Pre.DelegateGames.Cons.Classes
         //define the invoke methods
         public IEnumerable<Game> FilterGames(IEnumerable<Game> games, string search)
         {
-            return OnSearchGames(games, search);
+            return OnSearchGames.Invoke(games, search);
         }
 
         /*
