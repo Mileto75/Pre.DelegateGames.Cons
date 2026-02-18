@@ -10,8 +10,10 @@ foreach(var game in games)
 {
     Console.WriteLine(game.Title);
 }
-
-
+//declare filter class
+var gamesFilter = new GamesFilters();
+//add method to delegate type property
+gamesFilter.OnSearchGames = SearchByTitle;
 
 
 //methods
@@ -19,7 +21,19 @@ foreach(var game in games)
 /*
  4. Gebruik de delegates met named methods
  */
-
+//search games by title
+IEnumerable<Game> SearchByTitle(IEnumerable<Game> games, string search)
+{
+    //search games
+    var gamesResults = new List<Game>();
+    foreach(var game in games)
+    {
+        if (game.Title.Contains(search))
+            gamesResults.Add(game);
+    }
+    //return gamesResults
+    return gamesResults;
+}
 /*
  5. Gebruik de delegates met lambda methods
  */

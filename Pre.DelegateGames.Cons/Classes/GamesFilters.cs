@@ -34,6 +34,12 @@ namespace Pre.DelegateGames.Cons.Classes
         public SearchGamesByRatingOrPrice OnSearchGamesByRatingOrPrice { get; set; }
         public CheckGamesDelegate OnCheckGames { get; set; }
 
+        //define the invoke methods
+        public IEnumerable<Game> FilterGames(IEnumerable<Game> games, string search)
+        {
+            return OnSearchGames(games, search);
+        }
+
         /*
         7. Schrijf een algemene filterfunctie die gebruik maakt van een predicate als parameter
         */
