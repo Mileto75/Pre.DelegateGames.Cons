@@ -14,7 +14,7 @@ namespace Pre.DelegateGames.Cons.Classes
     /*
     2. Schrijf een delegate waarmee we de game met de hoogste rating of prijs kunnen ophalen
     */
-    public delegate Game SearchGamesByRatingOrPrice(,IEnumerable<Game> games, double max)
+    public delegate Game SearchGamesByRatingOrPrice(, IEnumerable<Game> games, double max);
     /*
      3. Schrijf een delegate waarmee we kunnen controleren of een bepaalde game in de lijst zit(return type bool)
      */
@@ -30,7 +30,10 @@ namespace Pre.DelegateGames.Cons.Classes
     public class GamesFilters
     {
         //write delegate type properties here
-        
+        public SearchGamesDelegate OnSearchGames { get; set; }
+        public SearchGamesByRatingOrPrice OnSearchGamesByRatingOrPrice { get; set; }
+        public CheckGamesDelegate OnCheckGames { get; set; }
+
         /*
         7. Schrijf een algemene filterfunctie die gebruik maakt van een predicate als parameter
         */
