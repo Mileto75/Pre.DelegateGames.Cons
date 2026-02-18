@@ -50,6 +50,15 @@ foreach (var game in results)
 {
     Console.WriteLine(game.Title);
 }
+
+//use generic filter method
+results = gamesFilter.FilterGamesWithLambda(games,delegate (Game g) { return (g.Title.Contains("z") && g.Price > 25.00); });
+Console.WriteLine("------Games with z > 25.00----------");
+PrintGames(results);
+results = gamesFilter.FilterGamesWithLambda(games,g => g.Genre.Contains("Horror"));
+results = gamesFilter.FilterGamesWithLambda(games,g => g.Price.Equals(25.00));
+results = gamesFilter.FilterGamesWithLambda(games,g => g.Price.Equals(25.00));
+
 //methods
 
 /*
@@ -63,4 +72,15 @@ foreach (var game in results)
 /*
  8. Gebruik de generic filter method met predicate
  */
-
+//helper methods
+void PrintGame(Game game)
+{
+    Console.WriteLine($"{game.Title}:{game.Price}");
+}
+void PrintGames(IEnumerable<Game> games)
+{
+    foreach(var game in games)
+    {
+        PrintGame(game);
+    }
+}

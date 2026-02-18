@@ -10,7 +10,7 @@ namespace Pre.DelegateGames.Cons.Classes
     /*
      1. Schrijf een delegate waarmee we games kunnen zoeken op titel of Genre
     */
-    public delegate IEnumerable<Game> SearchGamesDelegate(IEnumerable<Game> games,string searchString);
+    //public delegate IEnumerable<Game> SearchGamesDelegate(IEnumerable<Game> games,string searchString);
     /*
     2. Schrijf een delegate waarmee we de game met de hoogste rating of prijs kunnen ophalen
     */
@@ -30,10 +30,12 @@ namespace Pre.DelegateGames.Cons.Classes
     public class GamesFilters
     {
         //write delegate type properties here
-        public SearchGamesDelegate OnSearchGames { get; set; }
+        //public SearchGamesDelegate OnSearchGames { get; set; }
         public SearchGamesByRatingOrPrice OnSearchGamesByRatingOrPrice { get; set; }
-        public CheckGamesDelegate OnCheckGames { get; set; }
-
+        public Func<IEnumerable<Game>,string,bool> OnCheckGames { get; set; }
+        public Predicate<Game> CheckInGames { get; set; }
+        //generic delegate types
+        public Func<IEnumerable<Game>,string,IEnumerable<Game>> OnSearchGames { get; set; }
         //define the invoke methods
         public IEnumerable<Game> FilterGames(IEnumerable<Game> games, string search)
         {
@@ -43,5 +45,18 @@ namespace Pre.DelegateGames.Cons.Classes
         /*
         7. Schrijf een algemene filterfunctie die gebruik maakt van een predicate als parameter
         */
+        public IEnumerable<Game> FilterGamesWithLambda(IEnumerable<Game>games
+            ,Predicate<Game> filterLambda)
+        {
+            var filteredGames = new List<Game>();
+            foreach(var game in games)
+            {
+                if (filterLambda(game))
+                    filteredGames.Add(game);
+            }
+            return filteredGames;
+        }
+
+
     }
 }
