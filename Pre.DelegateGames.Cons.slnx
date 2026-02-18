@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Pre.DelegateGames.Cons/Pre.DelegateGames.Cons.csproj" />
+  <Project Path="Pre.DelegateGames.Core/Pre.DelegateGames.Core.csproj" />
+</Solution>
